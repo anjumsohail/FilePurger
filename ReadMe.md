@@ -9,6 +9,7 @@ It maintains **two separate logs**:
 ---
 
 ## 📜 Features
+# Version 1
 - Scan **all available drives** automatically or a specified path.
 - Select category: `documents`, `images`, `videos`, `archives`, or `all`.
 - Safe purging — moves files to a **quarantine folder** instead of deleting them.
@@ -23,7 +24,10 @@ It maintains **two separate logs**:
 - **Safe logging** – Generates detailed logs of actions taken and skipped files.
 - **Retention flexibility** – Set retention days from `0` (delete immediately) upwards.
 - **Cross-directory support** – Can purge multiple directories in one run.
-
+# Version 2
+- Automatic Execution using by taking parameters from Config.json (Sample included) instead of passing via Environment
+- Configration Option of AutoDele, is set to True, will Delete the Quarantined Files Directory as well.
+- configuration option to change the Log and Quarantine Files Directory
 ---
 
 ## 📂 Categories & File Types
@@ -59,87 +63,70 @@ No Python required
 Just download the built FilePurger.exe (see build instructions below)
 
 ## 🚀 Usage
+# Version 1:
 Command-line Options
 python safe_purge.py --category documents --retention-days 30 --quarantine "C:\Quarantine"
+# Version 2:
+Set the Parameters in config.json file first, if need to modify
+python auto_purge.py
 
 ## 📌 Example Use Cases
-
 - **Corporate data retention** – Automatically remove outdated reports or invoices.
 - **Disk space cleanup** – Keep only recent backups, remove older ones.
 - **Regulatory compliance** – Maintain only required records.
 
-
-## Arguments:
-
-Option	Description	Default
+## Configurations:
+# Verion 1
+Utility is customizable via following arguments.
 --category	File category (documents, images, videos, archives, all)	Required
 --retention-days	Move files older than these days	30
 --quarantine	Quarantine folder path	C:\FilePurger\Quarantine
 --path	Start scanning from this path	All available drives
+# Version 2
+--PROGRAM_DATA_DIR: config.json file Parameter to Set the default directory to store Logs and quarantine Files instead of Fixed C:\FilePurger
+--EXCLUDE_DIRS: Array of Directories or Drives that are should be excluded from scanning.
+--FILE_CATEGORIES: Array of File Types that need to scanned for quarantine
+--retention_days: Age of Files, in Number of Days, above that should be included into the quarantine List
+--dry_run: Boolean value: if true will scan only and not Quarantine the Files.
+--AutoDelete: Boolean value, if true will automatically Delete the Quarantined Files.
 Example 1 – Scan All Drives for Old PDFs
 python safe_purge.py --category documents --retention-days 60
-
 Example 2 – Scan a Specific Folder
 python safe_purge.py --category images --retention-days 0 --path "D:\Photos"
 
 ## 📄 Log Files
-
 scan_log.txt – Records all scanned files with status:
-
 [MOVE] – Moved to quarantine.
-
 [SKIP] – Too new, skipped.
-
 move_log.txt – Records only moved files (source → destination).
-
 Logs are saved in:
-
 C:\FilePurger\Logs
 
 ## 🛠️ Build Standalone Executable
-
 If you want to make FilePurger.exe so it can run without Python:
-
 1️⃣ Install Python (Official Version)
-
 Uninstall Microsoft Store Python if installed.
-
 Download from python.org – Python 3.12 (64-bit).
-
 During install:
-
 ✅ Add Python to PATH
-
 ✅ Install pip
-
 2️⃣ Install PyInstaller
 pip install pyinstaller psutil
 
 3️⃣ Build EXE
 pyinstaller --onefile --noconsole --name FilePurger safe_purge.py
-
-
 The EXE will appear in the dist folder.
 
 4️⃣ Install to C:\FilePurger
-
 Create folder:
-
 mkdir C:\FilePurger
-
-
 Copy FilePurger.exe there.
-
 Create C:\FilePurger\Logs and C:\FilePurger\Quarantine.
 
 ## 💼 Use Cases
-
 Corporate environments to archive old files from shared drives.
-
 Personal file cleanup while keeping a recovery option.
-
 Compliance with data retention policies.
-
 Preparing drives for reallocation without permanent deletion.
 
 ## Scheduled Task
@@ -155,15 +142,10 @@ and press Enter.
 ## ⚠️ Safety Notes
 
 FilePurger never deletes files directly — they are moved to quarantine.
-
 Review quarantine contents before manual deletion.
-
 Run with administrative rights to ensure all drives are scanned.
 
 📜 License
-
 MIT License – free to use, modify, and distribute.
-
 ## ✍️ Author
-
 Developed by Anjum Sohail – 2025.
