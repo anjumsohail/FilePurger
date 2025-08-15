@@ -51,7 +51,7 @@ It maintains **two separate logs**:
   ```bash
   pip install psutil
   or 
-  Optional: PyInstaller if you want to create a standalone .exe:
+  Optional: PyInstaller #if you want to create a standalone .exe:
   pip install pyinstaller 
   with
   pip install -r requirements.txt
@@ -78,17 +78,17 @@ python auto_purge.py
 ## Configurations:
 # Verion 1
 Utility is customizable via following arguments.
---category	File category (documents, images, videos, archives, all)	Required
---retention-days	Move files older than these days	30
---quarantine	Quarantine folder path	C:\FilePurger\Quarantine
---path	Start scanning from this path	All available drives
+- category	File category (documents, images, videos, archives, all)	Required
+- retention-days	Move files older than these days	30
+- quarantine	Quarantine folder path	C:\FilePurger\Quarantine
+- path	Start scanning from this path	All available drives
 # Version 2
---PROGRAM_DATA_DIR: config.json file Parameter to Set the default directory to store Logs and quarantine Files instead of Fixed C:\FilePurger
---EXCLUDE_DIRS: Array of Directories or Drives that are should be excluded from scanning.
---FILE_CATEGORIES: Array of File Types that need to scanned for quarantine
---retention_days: Age of Files, in Number of Days, above that should be included into the quarantine List
---dry_run: Boolean value: if true will scan only and not Quarantine the Files.
---AutoDelete: Boolean value, if true will automatically Delete the Quarantined Files.
+- **PROGRAM_DATA_DIR**: config.json file Parameter to Set the default directory to store Logs and quarantine Files instead of Fixed C:\FilePurger
+- **EXCLUDE_DIRS**: Array of Directories or Drives that are should be excluded from scanning.
+- **FILE_CATEGORIES**: Array of File Types that need to scanned for quarantine
+- **retention_days**: Age of Files, in Number of Days, above that should be included into the quarantine List
+- **dry_run**: Boolean value: if true will scan only and not Quarantine the Files.
+- **AutoDelete**: Boolean value, if true will automatically Delete the Quarantined Files.
 Example 1 – Scan All Drives for Old PDFs
 python safe_purge.py --category documents --retention-days 60
 Example 2 – Scan a Specific Folder
@@ -96,54 +96,49 @@ python safe_purge.py --category images --retention-days 0 --path "D:\Photos"
 
 ## 📄 Log Files
 scan_log.txt – Records all scanned files with status:
-[MOVE] – Moved to quarantine.
-[SKIP] – Too new, skipped.
-move_log.txt – Records only moved files (source → destination).
-Logs are saved in:
-C:\FilePurger\Logs
+- [MOVE] – Moved to quarantine.
+- [SKIP] – Too new, skipped.
+- move_log.txt – Records only moved files (source → destination).
+- Logs are saved in: C:\FilePurger\Logs (Note : in Version 1)
 
 ## 🛠️ Build Standalone Executable
 If you want to make FilePurger.exe so it can run without Python:
-1️⃣ Install Python (Official Version)
-Uninstall Microsoft Store Python if installed.
-Download from python.org – Python 3.12 (64-bit).
-During install:
-✅ Add Python to PATH
-✅ Install pip
-2️⃣ Install PyInstaller
-pip install pyinstaller psutil
-
-3️⃣ Build EXE
-pyinstaller --onefile --noconsole --name FilePurger safe_purge.py
-The EXE will appear in the dist folder.
-
-4️⃣ Install to C:\FilePurger
-Create folder:
-mkdir C:\FilePurger
-Copy FilePurger.exe there.
-Create C:\FilePurger\Logs and C:\FilePurger\Quarantine.
-
+- 1️⃣ Install Python (Official Version)
+  - Uninstall Microsoft Store Python if installed.
+  - Download from python.org – Python 3.12 (64-bit).
+- During install:
+  - ✅ Add Python to PATH
+  - ✅ Install pip
+  - 2️⃣ Install PyInstaller
+- pip install pyinstaller psutil
+- 3️⃣ Build EXE
+  - pyinstaller --onefile --noconsole --name FilePurger safe_purge.py
+- The EXE will appear in the dist folder.
+- 4️⃣ Install to C:\FilePurger
+  - Create folder:
+  - mkdir C:\FilePurger
+  - Copy FilePurger.exe there.
+  - Create C:\FilePurger\Logs and C:\FilePurger\Quarantine.
 ## 💼 Use Cases
-Corporate environments to archive old files from shared drives.
-Personal file cleanup while keeping a recovery option.
-Compliance with data retention policies.
-Preparing drives for reallocation without permanent deletion.
-
+- Corporate environments to archive old files from shared drives.
+- Personal file cleanup while keeping a recovery option.
+- Compliance with data retention policies.
+- Preparing drives for reallocation without permanent deletion.
 ## Scheduled Task
-Add the FilePurger.exe into the Windows Scheduled Tasks Or Modify the Included FilePurger_ScheduledTask.xml File and Import
-Open Task Scheduler (taskschd.msc).
-On the right panel, click Import Task….
-Select your .xml file.
-In the General tab, change the User to your own account (click Change User or Group).
-Adjust StartBoundary date/time in the XML or inside Task Scheduler if you want a different run time.
-Click OK — it will ask for your Windows password (so it can run even when you’re logged off).
+- Add the FilePurger.exe into the Windows Scheduled Tasks Or Modify the Included FilePurger_ScheduledTask.xml File and Import
+- Open Task Scheduler (taskschd.msc).
+- On the right panel, click Import Task….
+- Select your .xml file.
+- In the General tab, change the User to your own account (click Change User or Group).
+- Adjust StartBoundary date/time in the XML or inside Task Scheduler if you want a different run time.
+- Click OK — it will ask for your Windows password (so it can run even when you’re logged off).
 and press Enter.
 
 ## ⚠️ Safety Notes
 
-FilePurger never deletes files directly — they are moved to quarantine.
-Review quarantine contents before manual deletion.
-Run with administrative rights to ensure all drives are scanned.
+- FilePurger never deletes files directly — they are moved to quarantine.
+- Review quarantine contents before manual deletion.
+- Run with administrative rights to ensure all drives are scanned.
 
 📜 License
 MIT License – free to use, modify, and distribute.
