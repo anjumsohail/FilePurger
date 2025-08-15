@@ -1,0 +1,20 @@
+{
+    "PROGRAM_DATA_DIR": "C:\\FilePurger",
+    "EXCLUDE_DIRS": [
+        "C:\\Windows",
+        "C:\\Program Files",
+        "C:\\Program Files (x86)",
+		"D:\\Program Files",
+		"D:\\Program Files (x86)",
+		"E:\\Program Files",
+		"E:\\Program Files (x86)",
+		"F:\\Program Files",
+		"F:\\Program Files (x86)"
+    ],
+    "FILE_CATEGORIES": {
+        "documents": [".doc", ".docx", ".xls", ".xlsx", ".ppt", ".pptx", ".pdf", ".csv", ".rtf"]    
+    },
+    "retention_days": 0,
+    "dry_run": false,
+	"AutoDelete":false
+}
