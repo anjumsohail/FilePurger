@@ -1,0 +1,1 @@
+python safe_purge.py --category documents --retention-days 0
